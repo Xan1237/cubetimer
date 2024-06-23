@@ -1,0 +1,59 @@
+/* 
+color scheme:
+#A67259
+#598DA6
+
+*/
+body{
+    display: grid;
+    height:100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    grid-template-columns: 8fr 2fr;
+    grid-template-rows: 1fr 6fr 1fr;
+    grid-template-areas: 
+    "scramble scramble"
+    "clock times"
+    "footer footer";
+    background-color: #A67259;
+}
+#Scramble{
+    grid-area: scramble;
+    background-color: #598DA6;
+}
+#Clock{
+    grid-area: clock;
+    text-align: center;
+}
+#Times{
+    margin-left: auto;
+     font-size: 40px;
+    grid-area: times;
+}
+#footer{
+    grid-area: footer;
+    display: flex;
+    flex-direction: row;
+    background-color: #598DA6;
+}
+.stats{
+    display: flex;
+    margin: auto;
+}
+table, td{
+    border: 1px solid;
+    text-align: left;
+    border-collapse: collapse;
+}
+#gen{
+    background-color: #A67259;
+    border-radius: 10px;
+    height: 50%;
+}
+#letters{
+    text-align: center;
+}
+#speed{
+    font-size: 80px;
+}
