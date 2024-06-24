@@ -17,7 +17,9 @@ const display = document.getElementById("speed")
 let timer = null;
 let startTime = 0;
 let elaspstTime = 0;
+let solveNumber = 1;
 let isRunning = false;
+let table = document.getElementById("cubeTimes");
 function start(){
     if(!isRunning){
         startTime = Date.now() - elaspstTime;
@@ -35,11 +37,19 @@ function stop(){
     }
 }
 function reset(){
+    console.log(elaspstTime);
+    let newRow = table.insertRow(-1);
+    let cell1 = newRow.insertCell(0);
+    let cell2 = newRow.insertCell(1);
+    cell1.textContent = solveNumber;
+    cell2.textContent = Math.floor(elaspstTime / (1000 * 60) % 60) + ":" + Math.floor(elaspstTime / (1000*60*60)) + ":" + Math.floor(elaspstTime / 1000 % 60) + ":" + Math.floor(elaspstTime % 1000 / 10);
+    solveNumber++;
+
     clearInterval(timer);
     isRunning = false;
     startTime = 0;
     elaspstTime = 0;
-    display.textContent = "00:00:00:00";
+    display.textContent = "00:00:00";
 }
 
 function update(){
