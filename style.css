@@ -40,6 +40,12 @@ body{
     flex-direction: row;
     background-color: #598DA6;
     box-shadow: 0 -7px 8px -5px #333;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 5vh;
+
 }
 .stats{
     display: flex;
