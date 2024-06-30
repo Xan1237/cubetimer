@@ -10,24 +10,27 @@ body{
     width: 100vw;
     margin: 0;
     padding: 0;
-    grid-template-columns: 8fr 2fr;
+    grid-template-columns: 2fr 8fr;
     grid-template-rows: 1fr 6fr 1fr;
     grid-template-areas: 
     "scramble scramble"
-    "clock times"
+    "times clock"
     "footer footer";
     background-color: #A67259;
 }
 #Scramble{
+    display: grid;
     grid-area: scramble;
     background-color: #598DA6;
+    box-shadow: 0 7px 8px -5px #333;
 }
 #Clock{
     grid-area: clock;
     text-align: center;
+    margin-right: 15vw;
 }
 #Times{
-    margin-left: auto;
+    margin-right: auto;
      font-size: 40px;
     grid-area: times;
 }
@@ -36,6 +39,7 @@ body{
     display: flex;
     flex-direction: row;
     background-color: #598DA6;
+    box-shadow: 0 -7px 8px -5px #333;
 }
 .stats{
     display: flex;
@@ -56,4 +60,9 @@ table, td{
 }
 #speed{
     font-size: 80px;
+}
+#settings{
+    width: 8vw ;
+    height:auto;
+    margin-left: auto;
 }

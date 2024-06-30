@@ -20,6 +20,8 @@ let elaspstTime = 0;
 let solveNumber = 1;
 let isRunning = false;
 let table = document.getElementById("cubeTimes");
+let avrg = document.getElementById("avrg");
+let total = 0;
 function start(){
     if(!isRunning){
         startTime = Date.now() - elaspstTime;
@@ -43,8 +45,10 @@ function reset(){
     let cell2 = newRow.insertCell(1);
     cell1.textContent = solveNumber;
     cell2.textContent = Math.floor(elaspstTime / (1000 * 60) % 60) + ":" + Math.floor(elaspstTime / (1000*60*60)) + ":" + Math.floor(elaspstTime / 1000 % 60) + ":" + Math.floor(elaspstTime % 1000 / 10);
+    total += elaspstTime;
+    console.log(total/solveNumber)
+    avrg.textContent = Math.floor((total/solveNumber) / (1000 * 60) % 60) + ":" + Math.floor((total/solveNumber) / (1000*60*60)) + ":" + Math.floor((total/solveNumber) / 1000 % 60) + ":" + Math.floor((total/solveNumber) % 1000 / 10);
     solveNumber++;
-
     clearInterval(timer);
     isRunning = false;
     startTime = 0;
