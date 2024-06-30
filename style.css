@@ -17,6 +17,7 @@ body{
     "times clock"
     "footer footer";
     background-color: #A67259;
+    font-family: Arial;
 }
 #Scramble{
     display: grid;

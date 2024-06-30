@@ -22,6 +22,8 @@ let isRunning = false;
 let table = document.getElementById("cubeTimes");
 let avrg = document.getElementById("avrg");
 let total = 0;
+let lowest = 100000000000000000000000000000000000;
+const best = document.getElementById("best");
 function start(){
     if(!isRunning){
         startTime = Date.now() - elaspstTime;
@@ -47,8 +49,13 @@ function reset(){
     cell2.textContent = Math.floor(elaspstTime / (1000 * 60) % 60) + ":" + Math.floor(elaspstTime / (1000*60*60)) + ":" + Math.floor(elaspstTime / 1000 % 60) + ":" + Math.floor(elaspstTime % 1000 / 10);
     total += elaspstTime;
     console.log(total/solveNumber)
-    avrg.textContent = Math.floor((total/solveNumber) / (1000 * 60) % 60) + ":" + Math.floor((total/solveNumber) / (1000*60*60)) + ":" + Math.floor((total/solveNumber) / 1000 % 60) + ":" + Math.floor((total/solveNumber) % 1000 / 10);
+    avrg.textContent = "Avrg: " + Math.floor((total/solveNumber) / (1000 * 60) % 60) + ":" + Math.floor((total/solveNumber) / (1000*60*60)) + ":" + Math.floor((total/solveNumber) / 1000 % 60) + ":" + Math.floor((total/solveNumber) % 1000 / 10);
     solveNumber++;
+    if(lowest>elaspstTime){
+        lowest = elaspstTime;
+        best.textContent = "Best: " + Math.floor(lowest / (1000 * 60) % 60) + ":" + Math.floor(lowest / (1000*60*60)) + ":" + Math.floor(lowest / 1000 % 60) + ":" + Math.floor(lowest % 1000 / 10);
+    }
+
     clearInterval(timer);
     isRunning = false;
     startTime = 0;
