@@ -2,13 +2,48 @@
 #DUFFURRDL  B UUBRRBDDU
 import random
 import twophase.solver  as sv
+import pyscript
 final2 = "Error: Some edges are undefined."
+#solved positon of the cube
 #            0                                   9                                  18                                   27                                  36                                  45                                     
 possible = ["U","U","U","U","U","U","U","U","U","R","R","R","R","R","R","R","R","R","F","F","F","F","F","F","F","F","F","D","D","D","D","D","D","D","D","D","L","L","L","L","L","L","L","L","L","B","B","B","B","B","B","B","B","B"]
 def move(x, y):
     temp = possible[y]
     possible[y] = possible[x]
     possible[x] = temp
+def f():
+    move(19,23)
+    move(19,25)
+    move(19,21)
+    move(18,20)
+    move(18,26)
+    move(18,24)
+    move(7,12)
+    move(7,28)
+    move(7,41)
+    move(6,9)
+    move(6,29)
+    move(6,44)
+    move(8,15)
+    move(8,27)
+    move(8,38)
+def b():
+    move(46,50)
+    move(46,52)
+    move(46,48)
+    move(45,47)
+    move(45,53)
+    move(45,51)
+    move(1,39)
+    move(1,34)
+    move(1,14)
+    move(2,36)
+    move(2,33)
+    move(2,17)
+    move(0,42)
+    move(0,35)
+    move(0,11)
+#moves array in a way that simulates the cube turning left downwards
 def l():
     move(37,41)
     move(37,43)
@@ -25,6 +60,7 @@ def l():
     move(3,21)
     move(3,30)
     move(3,50)
+# moves the array in a a fashion that simulates the top of the cube moving in a counter clockwise motion
 def uprime():
     move(0,6)
     move(0,8)
@@ -43,6 +79,7 @@ def uprime():
     move(10,46)
     move(19,46)
     move(37,10)
+#moves the array in a fashion that the top of the cube moves in a clockwise rotation
 def r():
     move(10,14)
     move(10,16)
@@ -59,32 +96,97 @@ def r():
     move(23,5)
     move(23,48)
     move(23,32)
-l()
-uprime()
-r()
-l()
-r()
-uprime()
-l()
-l()
-r()
+for x in range (0,500):
+    mover = random.randint(0,14)
+    if mover == 0:
+        r()
+    if mover == 1:
+        l()
+    if mover == 2:
+        uprime()
+    if mover == 3:
+        b()
+    if mover == 4:
+        f()
+    if mover == 5:
+        r()
+        r()
+    if mover == 6:
+        l()
+        l()
+    if mover == 7:
+        uprime()
+        uprime()
+    if mover == 8:
+        f()
+        f()
+    if mover == 9:
+        b()
+        b()
+    if mover == 10: 
+        r()
+        r()
+        r()
+    if mover == 11:
+        uprime()
+        uprime()
+        uprime()
+    if mover == 12:
+        f()
+        f()
+        f()
+    if mover == 13:
+        b()
+        b()
+        b()
+    if mover == 14:
+        l()
+        l()
+        l()
+
+
+    
+
 while final2 == "Error: Some edges are undefined." or final2 == "Error: Some corners are undefined.":
-    cubestring = 'DUFFURRDLBUUBRRBDDUFULFURDRFLDBDBBRRLRBULFDLULLFBBFFDL'
-    corners = ["0", "2"  ,"6" ,"8", "9", "11", "15", "17", "18", "20", "24", "26", "27", "29", "33", "35", "36", "38", "42", "44", "45", "47", "51", "53"]
-    solve = sv.solve(cubestring,19,2)
-    resr = "DUFFURRDLBUUBRRBDDUFULFURDRFLDBDBBRRLRBULFDLULLFBBFFDL"
-    resr = resr.replace("", "\"")
-    clean = solve.replace("3", '\'')
     mixer = str(possible)
     final = mixer.replace("\'", "")
     final = final.replace(",", "")
     final = final.replace("[", "")
     final =  final.replace("]", "")
     final = final.replace(" ", "")
-    print()
     final2 = sv.solve(final)
     print(final)
 final2 = final2.replace("3", '\'')
 final2 = final2.replace("1", '')
-
-print(final2)
+reverse = final2.split(" ")
+reverse.pop()
+scramble = ""
+for x in reversed(reverse):
+    if x == "R":
+        scramble += "R' "
+    elif x == "L":
+        scramble += "L' "
+    elif x == "U":
+        scramble += "U' "
+    elif x == "D":
+        scramble += "D' "
+    elif x == "B":
+        scramble += "B' "
+    elif x == "F":
+        scramble += "F' "
+    elif x == "R'":
+        scramble += "R "
+    elif x == "L'":
+        scramble += "L "
+    elif x == "U'":
+        scramble += "U "
+    elif x == "D'":
+        scramble += "D "
+    elif x == "B'":
+        scramble += "B "
+    elif x == "F'":
+        scramble += "F "
+    else:
+        scramble += x
+        scramble += " "
+print(scramble)
