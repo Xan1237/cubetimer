@@ -3,6 +3,7 @@ let letters = document.getElementById("letters");
 let passedTime = 0
 document.addEventListener('keydown', function(event) {
     if (event === 32 || event.key === ' ') {
+        event.preventDefault();
         speed.style.color = "green"
     }
     stop();
@@ -13,6 +14,9 @@ document.addEventListener('keyup', function(event) {
     }
     start();
 });
+fetch("/api/users").then(response => response.json())
+.then(data => letters.innerHTML = data.name)
+.catch(error => console.error(error));
 /* timer controls */
 const display = document.getElementById("speed")
 let timer = null;
