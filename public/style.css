@@ -2,8 +2,9 @@
 color scheme:
 #A67259
 #598DA6
-
 */
+
+/* sets up my grid to base the website off*/
 body{
     display: grid;
     height:100vh;
@@ -19,6 +20,8 @@ body{
     background-color: #A67259;
     font-family: Arial;
 }
+
+/*styling and decleration of the grid elemets*/
 #Scramble{
     display: grid;
     grid-area: scramble;
@@ -49,10 +52,14 @@ body{
     font-family: Arial;
 
 }
+
+/*styles the stats at the bottom in the page including avrg best and avrg5*/
 .stats{
     display: flex;
     margin: auto;
 }
+
+/*styles the table where the times are kept*/
 table, td{
     border: 1px solid;
     text-align: left;
@@ -63,12 +70,18 @@ table, td{
     border-radius: 10px;
     height: 50%;
 }
+
+/*styles the scramble letters*/
 #letters{
     text-align: center;
 }
+
+/*time of the solve*/
 #speed{
     font-size: 80px;
 }
+
+/*settings icon*/
 #settings{
     width: 8vw ;
     height:auto;
