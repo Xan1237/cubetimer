@@ -3,7 +3,6 @@ let speed = document.getElementById("speed");
 let isRunning = false;
 let letters = document.getElementById("letters");
 let passedTime = 0
-
 //timer constants
 const display = document.getElementById("speed")
 let timer = null;
@@ -12,14 +11,33 @@ let elaspstTime = 0;
 let solveNumber = 1;
 let table = document.getElementById("cubeTimes");
 let avrg = document.getElementById("avrg");
+let middle = document.getElementById("mean");
 let total = 0;
 let lowest = 100000000000000000000000000000000000;
 const best = document.getElementById("best");
-
+let scramble = document.getElementById("Scramble");
+let footer = document.getElementById("footer");
+let cubeTimes = document.getElementById("cubeTimes");
+let sortedTimes = [];
+let showhide = document.getElementById("showhide");
+let timerhidden = false;
+showhide.style.display = 'none';
+cubeTimes.addEventListener('click', function(event){
+    if(timerhidden == false){
+        cubeTimes.style.display = 'none';
+        showhide.style.display = 'block'
+        timerhidden = true;
+    }
+});
+showhide.addEventListener('click', function(event){
+    showhide.style.display = 'none';
+    cubeTimes.style.display = 'contents'
+    timerhidden = false;
+});
 //runs when the spacebar is pressed down changes the color of timer before it starts also resets the timer to 0
 document.addEventListener('keydown', function(event) {
+    event.preventDefault();
     if (event === 32 || event.key === ' ' && !isRunning) {
-        event.preventDefault();
         speed.style.color = "green"
         display.textContent = "0.00";
         
@@ -46,9 +64,15 @@ function start(){
     if(!isRunning){
         startTime = Date.now() - elaspstTime;
         timer = setInterval(update, 10);
+        scramble.style.visibility = 'hidden';
+        footer.style.visibility = 'hidden';
+        cubeTimes.style.visibility = 'hidden';
         isRunning = true;
     }
     else{
+        scramble.style.visibility = 'visible';
+        footer.style.visibility = 'visible';
+        cubeTimes.style.visibility = 'visible';
         reset();
     }
 }
@@ -68,6 +92,7 @@ function reset(){
     let newRow = table.insertRow(-1);
     let cell1 = newRow.insertCell(0);
     let cell2 = newRow.insertCell(1);
+    let mean;
     cell1.textContent = solveNumber;
     if((Math.floor(elaspstTime / (1000*60*60)))>0){
         cell2.textContent = Math.floor(elaspstTime / (1000*60*60)) + ":" + Math.floor(elaspstTime / (1000 * 60) % 60) + ":" + Math.floor(elaspstTime / 1000 % 60) + "." + Math.floor(elaspstTime % 1000 / 10);
@@ -82,14 +107,57 @@ function reset(){
     //calculates the avrg
     total += elaspstTime;
     console.log(total/solveNumber)
-    avrg.textContent = "Avrg: " + Math.floor((total/solveNumber) / (1000 * 60) % 60) + ":" + Math.floor((total/solveNumber) / (1000*60*60)) + ":" + Math.floor((total/solveNumber) / 1000 % 60) + ":" + Math.floor((total/solveNumber) % 1000 / 10);
+
+    //calculates mean
+    sortedTimes.push(elaspstTime);
+    sortedTimes = sortedTimes.sort();
+    console.log(sortedTimes);
+    if(sortedTimes.length % 2 !=0){
+        mean = sortedTimes[Math.floor((sortedTimes.length/2))];
+        console.log(Math.floor((sortedTimes.length/2)));
+        console.log(sortedTimes);
+    }
+    else{
+        mean = sortedTimes[sortedTimes.length/2];
+        console.log(mean);
+        if(sortedTimes.length ==2){
+            mean += sortedTimes[(sortedTimes.length/2)-1];
+        }
+        else{
+            mean += sortedTimes[(sortedTimes.length/2)+1];
+        }
+        console.log(mean);
+        mean = mean/2;
+    }
+
+    if((Math.floor(elaspstTime / (1000*60*60)))>0){
+        middle.textContent = "Mean: " + (mean / (1000 * 60) % 60) + "." + (mean / (1000*60*60)) + ":" + (mean / 1000 % 60) + ":" + (mean % 1000 / 10);
+        avrg.textContent = "Avrg: " + Math.floor((total/solveNumber) / (1000 * 60) % 60) + "." + Math.floor((total/solveNumber) / (1000*60*60)) + ":" + Math.floor((total/solveNumber) / 1000 % 60) + ":" + Math.floor((total/solveNumber) % 1000 / 10);
+        if(lowest>elaspstTime){
+            lowest = elaspstTime;
+            best.textContent = "Best: " + Math.floor(lowest / (1000 * 60) % 60) + ":" + Math.floor(lowest / (1000*60*60)) + ":" + Math.floor(lowest / 1000 % 60) + "." + Math.floor(lowest % 1000 / 10);
+        }
+        
+    }
+    else if((Math.floor(elaspstTime / (1000 * 60) % 60))>0){
+        middle.textContent = "Mean: " + (mean / (1000*60*60)) + ":" + (mean / 1000 % 60) + ":" + (mean % 1000 / 10);
+        avrg.textContent = "Avrg: " +  Math.floor((total/solveNumber) / (1000*60*60)) + "." + Math.floor((total/solveNumber) / 1000 % 60) + ":" + Math.floor((total/solveNumber) % 1000 / 10);
+        if(lowest>elaspstTime){
+            lowest = elaspstTime;
+            best.textContent = "Best: " +  Math.floor(lowest / (1000*60*60)) + ":" + Math.floor(lowest / 1000 % 60) + "." + Math.floor(lowest % 1000 / 10);
+        }
+    }
+    else{
+        middle.textContent = "Mean: "  + Math.floor(mean / 1000 % 60) + "." + Math.floor(mean % 1000 / 10);
+        avrg.textContent = "Avrg: " + Math.floor((total/solveNumber) / 1000 % 60) + "." + Math.floor((total/solveNumber) % 1000 / 10);
+        if(lowest>elaspstTime){
+            lowest = elaspstTime;
+            best.textContent = "Best: " + Math.floor(lowest / 1000 % 60) + "." + Math.floor(lowest % 1000 / 10);
+        }
+    }
     solveNumber++;
 
     //calculates the best time
-    if(lowest>elaspstTime){
-        lowest = elaspstTime;
-        best.textContent = "Best: " + Math.floor(lowest / (1000 * 60) % 60) + ":" + Math.floor(lowest / (1000*60*60)) + ":" + Math.floor(lowest / 1000 % 60) + ":" + Math.floor(lowest % 1000 / 10);
-    }
 
     //resets timer
     clearInterval(timer);

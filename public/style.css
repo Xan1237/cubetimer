@@ -20,23 +20,43 @@ body{
     background-color: #A67259;
     font-family: Arial;
 }
-
+#showhide{
+    border-style: none;
+    display: block;
+    height:80vw;
+    width: 1vw;
+    margin-bottom: auto;
+    background-color: #9f6b53;
+}
 /*styling and decleration of the grid elemets*/
 #Scramble{
+    height: 15vh;
+    font-size: 30px;
     display: grid;
     grid-area: scramble;
     background-color: #598DA6;
     box-shadow: 0 7px 8px -5px #333;
 }
 #Clock{
+    width: 80vw;
     grid-area: clock;
     text-align: center;
-    margin-right: 15vw;
 }
+
 #Times{
+    width: 20vw;
     margin-right: auto;
-     font-size: 40px;
+    font-size: 40px;
     grid-area: times;
+
+    height: 80vh;
+    grid-area: times;
+    overflow-y: scroll;
+    scrollbar-width: none;  
+    -ms-overflow-style: none;  
+}
+#Times::-webkit-scrollbar {
+    display: none;
 }
 #footer{
     grid-area: footer;
@@ -47,11 +67,12 @@ body{
     position: fixed;
     left: 0;
     bottom: 0;
-    width: 100%;
+    width: 100vw;
     height: 5vh;
-    font-family: Arial;
+    font-family: Orbitron;
 
 }
+
 
 /*styles the stats at the bottom in the page including avrg best and avrg5*/
 .stats{
@@ -62,8 +83,13 @@ body{
 /*styles the table where the times are kept*/
 table, td{
     border: 1px solid;
-    text-align: left;
+    text-align: center;
     border-collapse: collapse;
+    font-size: 55px;
+    background-color: rgb(213, 205, 205);
+}
+table{
+    box-shadow: 5px 5px 5px #333;
 }
 #gen{
     background-color: #A67259;
@@ -76,14 +102,109 @@ table, td{
     text-align: center;
 }
 
+#flex{
+    display: flex;
+}
 /*time of the solve*/
 #speed{
-    font-size: 80px;
+    display: inline-block;
+    font-family: Orbitron;
+    font-size: 100px;
+    margin-right: 21vw;
 }
 
 /*settings icon*/
 #settings{
-    width: 8vw ;
+    width: 6vw ;
     height:auto;
-    margin-left: auto;
+    margin-bottom: auto;
+    margin-right: auto;
+}
+/*mobile view*/
+@media only screen and (max-width:1500px) and (min-width: 700px){
+    #Scramble{
+        font-size: 21px;
+    }
+    #Times{
+        width: 30vw;
+    }
+    #speed{
+        margin-right: 31vw;
+    }
+    #Clock{
+        width:70vw;
+    }
+    table,td{
+        font-size: 40px;
+    }
+}
+@media only screen and (max-width: 700px){
+
+
+
+    table, td{
+        border: 1px solid;
+        text-align: center;
+        border-collapse: collapse;
+        font-size: 25px;
+        background-color: rgb(213, 205, 205);
+    }
+    #Times{
+        display: inline-block;
+        width: 20vw;
+        height: 25vh;
+        margin-right: auto;
+        font-size: 30px;
+        grid-area: times;
+        overflow-y: scroll;
+    }
+    #flex{
+        flex-direction: column-reverse;
+    }
+    #footer{
+        display: flex;
+        flex-direction: column;
+        height: 10vh;
+        width: 100vw;
+    }
+    #stats{
+        margin-top: 5px;
+    }
+    body{
+        display: grid;
+        height:100vh;
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 3fr 6fr 1fr;
+        grid-template-areas: 
+        "scramble"
+        "clock"
+        "times"
+        "footer";
+        background-color: #A67259;
+        font-family: Arial;
+    }
+    #Times{
+        margin-top: auto;
+        width:100vw;
+        margin-left: auto;
+        margin-right:auto;
+    }
+    #speed{
+        display: inline-block;
+        width:100vw;
+        text-align: center;
+        margin-right: auto;
+    }
+    #Clock{
+        width:100vw;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #Scramble{
+        font-size: 15px;
+        height: auto;
+    }
 }
