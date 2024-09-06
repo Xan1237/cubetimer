@@ -9,6 +9,7 @@ let timer = null;
 let startTime = 0;
 let elaspstTime = 0;
 let solveNumber = 1;
+let clock = document.getElementById("Clock");
 let table = document.getElementById("cubeTimes");
 let avrg = document.getElementById("avrg");
 let middle = document.getElementById("mean");
@@ -22,6 +23,8 @@ let sortedTimes = [];
 let showhide = document.getElementById("showhide");
 let timerhidden = false;
 showhide.style.display = 'none';
+let w = window.innerWidth;
+let h = window.innerHeight;
 cubeTimes.addEventListener('click', function(event){
     if(timerhidden == false){
         cubeTimes.style.display = 'none';
@@ -29,6 +32,7 @@ cubeTimes.addEventListener('click', function(event){
         timerhidden = true;
     }
 });
+
 showhide.addEventListener('click', function(event){
     showhide.style.display = 'none';
     cubeTimes.style.display = 'contents'
@@ -44,7 +48,18 @@ document.addEventListener('keydown', function(event) {
     }
     stop();
 });
-
+clock.addEventListener('mousedown', function(event){
+    event.preventDefault();
+        if(!isRunning){
+            speed.style.color = "green"
+        }
+        display.textContent = "0.00";
+    stop();
+});
+clock.addEventListener('mouseup', function(event){
+        speed.style.color = "black"
+    start();
+});
 //starts the timer
 document.addEventListener('keyup', function(event) {
     if (event === 32 || event.key === ' ') {
