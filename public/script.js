@@ -67,12 +67,14 @@ function start(){
         scramble.style.visibility = 'hidden';
         footer.style.visibility = 'hidden';
         cubeTimes.style.visibility = 'hidden';
+        showhide.style.visibility = 'hidden';
         isRunning = true;
     }
     else{
         scramble.style.visibility = 'visible';
         footer.style.visibility = 'visible';
         cubeTimes.style.visibility = 'visible';
+        showhide.style.visibility = 'visible';
         reset();
     }
 }
@@ -110,7 +112,7 @@ function reset(){
 
     //calculates mean
     sortedTimes.push(elaspstTime);
-    sortedTimes = sortedTimes.sort();
+    sortedTimes = sortedTimes.sort(function(a, b){return a-b});
     console.log(sortedTimes);
     if(sortedTimes.length % 2 !=0){
         mean = sortedTimes[Math.floor((sortedTimes.length/2))];
@@ -120,18 +122,14 @@ function reset(){
     else{
         mean = sortedTimes[sortedTimes.length/2];
         console.log(mean);
-        if(sortedTimes.length ==2){
-            mean += sortedTimes[(sortedTimes.length/2)-1];
-        }
-        else{
-            mean += sortedTimes[(sortedTimes.length/2)+1];
-        }
+            mean = sortedTimes[Math.floor((sortedTimes.length/2)-1)];
+            mean += sortedTimes[Math.floor((sortedTimes.length/2))];
         console.log(mean);
         mean = mean/2;
     }
 
     if((Math.floor(elaspstTime / (1000*60*60)))>0){
-        middle.textContent = "Mean: " + (mean / (1000 * 60) % 60) + "." + (mean / (1000*60*60)) + ":" + (mean / 1000 % 60) + ":" + (mean % 1000 / 10);
+        middle.textContent = "Meadian: " + Math.floor(mean / (1000 * 60) % 60) + "." + Math.floor(mean / (1000*60*60)) + ":" + Math.floor(mean / 1000 % 60) + ":" + Math.floor(mean % 1000 / 10);
         avrg.textContent = "Avrg: " + Math.floor((total/solveNumber) / (1000 * 60) % 60) + "." + Math.floor((total/solveNumber) / (1000*60*60)) + ":" + Math.floor((total/solveNumber) / 1000 % 60) + ":" + Math.floor((total/solveNumber) % 1000 / 10);
         if(lowest>elaspstTime){
             lowest = elaspstTime;
@@ -140,7 +138,7 @@ function reset(){
         
     }
     else if((Math.floor(elaspstTime / (1000 * 60) % 60))>0){
-        middle.textContent = "Mean: " + (mean / (1000*60*60)) + ":" + (mean / 1000 % 60) + ":" + (mean % 1000 / 10);
+        middle.textContent = "Meadian: " + Math.floor(mean / (1000*60*60)) + ":" + Math.floor(mean / 1000 % 60) + ":" + Math.floor(mean % 1000 / 10);
         avrg.textContent = "Avrg: " +  Math.floor((total/solveNumber) / (1000*60*60)) + "." + Math.floor((total/solveNumber) / 1000 % 60) + ":" + Math.floor((total/solveNumber) % 1000 / 10);
         if(lowest>elaspstTime){
             lowest = elaspstTime;
@@ -148,7 +146,8 @@ function reset(){
         }
     }
     else{
-        middle.textContent = "Mean: "  + Math.floor(mean / 1000 % 60) + "." + Math.floor(mean % 1000 / 10);
+        console.log(Math.floor(mean / 1000 % 60) + "." + Math.floor(mean % 1000 / 10));
+        middle.textContent = "Meadian: "  + Math.floor(mean / 1000 % 60) + "." + Math.floor(mean % 1000 / 10);
         avrg.textContent = "Avrg: " + Math.floor((total/solveNumber) / 1000 % 60) + "." + Math.floor((total/solveNumber) % 1000 / 10);
         if(lowest>elaspstTime){
             lowest = elaspstTime;
