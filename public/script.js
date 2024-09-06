@@ -48,17 +48,24 @@ document.addEventListener('keydown', function(event) {
     }
     stop();
 });
-clock.addEventListener('mousedown', function(event){
-    event.preventDefault();
+clock.addEventListener('touchstart', function(event){
+    w = window.innerWidth;
+    if(w<700){ 
         if(!isRunning){
             speed.style.color = "green"
         }
+        console.log(3);
+        event.preventDefault();
         display.textContent = "0.00";
-    stop();
+        stop();
+    }
 });
-clock.addEventListener('mouseup', function(event){
-        speed.style.color = "black"
-    start();
+clock.addEventListener('touchend', function(event){
+    w = window.innerWidth;
+    if(w<700){
+        speed.style.color = "black";
+        start();
+    }
 });
 //starts the timer
 document.addEventListener('keyup', function(event) {
@@ -123,23 +130,17 @@ function reset(){
 
     //calculates the avrg
     total += elaspstTime;
-    console.log(total/solveNumber)
 
     //calculates mean
     sortedTimes.push(elaspstTime);
     sortedTimes = sortedTimes.sort(function(a, b){return a-b});
-    console.log(sortedTimes);
     if(sortedTimes.length % 2 !=0){
         mean = sortedTimes[Math.floor((sortedTimes.length/2))];
-        console.log(Math.floor((sortedTimes.length/2)));
-        console.log(sortedTimes);
     }
     else{
         mean = sortedTimes[sortedTimes.length/2];
-        console.log(mean);
             mean = sortedTimes[Math.floor((sortedTimes.length/2)-1)];
             mean += sortedTimes[Math.floor((sortedTimes.length/2))];
-        console.log(mean);
         mean = mean/2;
     }
 
@@ -161,7 +162,6 @@ function reset(){
         }
     }
     else{
-        console.log(Math.floor(mean / 1000 % 60) + "." + Math.floor(mean % 1000 / 10));
         middle.textContent = "Meadian: "  + Math.floor(mean / 1000 % 60) + "." + Math.floor(mean % 1000 / 10);
         avrg.textContent = "Avrg: " + Math.floor((total/solveNumber) / 1000 % 60) + "." + Math.floor((total/solveNumber) % 1000 / 10);
         if(lowest>elaspstTime){
