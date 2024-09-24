@@ -20,6 +20,8 @@ body{
     background-color: #A67259;
     font-family: Arial;
 }
+
+/* display requirments for pull tab that is clicked to show times table*/
 #showhide{
     border-style: none;
     display: block;
@@ -28,6 +30,8 @@ body{
     margin-top: auto;
     margin-right: auto;
 }
+
+
 /*styling and decleration of the grid elemets*/
 #Scramble{
     height: 15vh;
@@ -37,27 +41,33 @@ body{
     background-color: #598DA6;
     box-shadow: 0 7px 8px -5px #333;
 }
+
+/* area in the grid where the clock is found */
 #Clock{
     width: 80vw;
     grid-area: clock;
     text-align: center;
 }
 
+/* styles for the table of times */
 #Times{
     width: 20vw;
     margin-right: auto;
     font-size: 40px;
     grid-area: times;
-
     height: 80vh;
     grid-area: times;
     overflow-y: scroll;
     scrollbar-width: none;  
     -ms-overflow-style: none;  
 }
+
+/* hides the scrolbar for the table area */
 #Times::-webkit-scrollbar {
     display: none;
 }
+
+/* styles for the footer */
 #footer{
     grid-area: footer;
     display: flex;
@@ -88,9 +98,13 @@ table, td{
     font-size: 55px;
     background-color: rgb(213, 205, 205);
 }
+
+/* creates table shadow */
 table{
     box-shadow: 5px 5px 5px #333;
 }
+
+
 #gen{
     background-color: #A67259;
     border-radius: 10px;
@@ -102,6 +116,7 @@ table{
     text-align: center;
 }
 
+/* creates a flexbox */
 #flex{
     display: flex;
 }
@@ -113,13 +128,6 @@ table{
     margin-right: 21vw;
 }
 
-/*settings icon*/
-#settings{
-    width: 6vw ;
-    height:auto;
-    margin-bottom: auto;
-    margin-right: auto;
-}
 /*mobile view*/
 @media only screen and (max-width:1500px) and (min-width: 700px){
     
@@ -212,5 +220,13 @@ table{
     #Scramble{
         font-size: 15px;
         height: 20vh;
+    }
+}
+@media only screen and (max-height:600px){
+    table{
+        margin-top: 30px;
+    }
+    #Scramble{
+        height: 24vh;
     }
 }

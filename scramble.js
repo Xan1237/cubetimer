@@ -24,7 +24,7 @@ app.get('/', (req, res) =>{
     res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-/*enables the use of the css and javascript front end files*/
+/*enables the use of the css and javascript front end files found in the public file*/
 app.use(express.static(__dirname + '/public'));
 
 /*starts the server at local port 8080*/
